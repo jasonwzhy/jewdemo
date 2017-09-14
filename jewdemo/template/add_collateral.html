@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block csslink %}
+<link href="{%static "plugins/bower_components/jquery-wizard-master/css/wizard.css" %}" rel="stylesheet">
+<link href="{%static "plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css" %}" rel="stylesheet">
+
+<link href="{%static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %}" rel="stylesheet">
+<link href="{%static "plugins/bower_components/custom-select/custom-select.css" %}" rel="stylesheet">
+<link href="{%static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %}" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block appscript %}
+<script src="{%static "plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js" %}"></script>
+<!-- <script src="{%static "plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js" %}"></script> -->
+
+
+<script src="{%static "js/custom.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/custom-select/custom-select.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js" %}"></script>
+
+<!-- <script src="{%static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %}"></script> -->
+
+
+
+<script>
+    (function() {
+        $('#exampleBasic2').wizard({
+            onFinish: function() {
+                location.href='/riskmgr/index';
+            }
+        });
+
+        // $(".select2").select2();
+    })(); 
+
+    jQuery(document).ready(function() {
+        $(".select2").select2();
+        jQuery('.datepicker').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+{% verbatim %}
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">创建抵押业务资产信息管理</h4> </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+        <ol class="breadcrumb">
+            <li><a href="#">资产管理</a></li>
+            <li class="active">添加创建资产信息</li>
+        </ol>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-md-12">
+        <div class="white-box">
+            <h3 class="box-title">Blank Starter page</h3> </div>
+    </div>
+</div>  -->
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <!-- <h3 class="box-title m-b-0">With Icon</h3>
+            <p class="text-muted m-b-30 font-13"> This is the Icon wizrd without validation.</p> -->
+            <div id="exampleBasic2" class="wizard">
+                <ul class="wizard-steps" role="tablist">
+                    <li class="active" role="tab">
+                        <h4><span><i class="ti-pencil-alt"></i></span>抵押业务信息</h4> </li>
+                    <li role="tab">
+                        <h4><span><i class="ti-credit-card"></i></span>抵押资产信息</h4> </li>
+                    <li role="tab">
+                        <h4><span><i class="ti-user"></i></span>贷款业务客户信息</h4> </li>
+                </ul>
+                <div class="wizard-content">
+                    <div class="row wizard-pane active" role="tabpanel">
+                        <div class="col-sm-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">抵押物确认书编号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="确认书编号"> </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>银行名称</label>
+                                    <select class="form-control select2">
+                                    <option>Select</option>
+                                    <optgroup label="中国建设银行">
+                                        <option value="jh_jh_mjzh">中国建设银行 岷江支行</option>
+                                        <option value="jh_slzh">中国建设银行 双流支行</option>
+                                        <option value="jh_jkzh">中国建设银行 经开支行</option>
+                                        <option value="jh_qzh">中国建设银行 七支行</option>
+                                        <option value="jh_szh">中国建设银行 三支行</option>
+                                        <option value="jh_yzh">中国建设银行 一支行</option>
+                                        <option value="jh_wjzh">中国建设银行 温江支行</option>
+                                    </optgroup>
+                                    <optgroup label="泸州市商业银行">
+                                        <option value="lzsyh_wjzh">泸州市商业银行 温江支行</option>
+                                        <option value="lzsyh_pxzh">泸州市商业银行 郫县支行</option>
+                                    </optgroup>
+                                </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">银行客户经理</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-user"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputpwd1">银行客户经理联系电话</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-headphone-alt"></i></div>
+                                        <input type="password" class="form-control" id="exampleInputpwd1" placeholder="Enter email"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputpwd2">服务协议编号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-ticket"></i></div>
+                                        <input type="password" class="form-control" id="exampleInputpwd2" placeholder="Enter email"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputpwd2">档案编号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-bag"></i></div>
+                                        <input type="password" class="form-control" id="exampleInputpwd2" placeholder="Enter email"> </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">担保物类型</label>
+                                        <select class="form-control">
+                                            <option value="" disabled selected>--- 请选择抵担保物类型 ---</option>
+                                            <option value="house">民用住宅房产</option>
+                                            <option value="car" disabled>民用汽车 (即将上线)</option>
+                                        </select>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <div class="checkbox checkbox-success">
+                                        <input id="checkbox1" type="checkbox">
+                                        <label for="checkbox1"> Remember me </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button> -->
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">申请贷款金额</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-user"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="Username"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">申请贷款时间</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        <input type="text" class="form-control datepicker" id="declare_dt" placeholder="mm/dd/yyyy"> 
+                                    </div>
+                                    <!-- <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-calendar"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> </div> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">放款金额</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-layout-list-large-image"></i></div>
+                                        <input type="email" class="form-control" id="loaned_money" placeholder="Enter email"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">放款时间</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        <input type="text" class="form-control datepicker" id="declare_dt" placeholder="mm/dd/yyyy"> 
+                                    </div>
+                                    <!-- <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-timer"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> </div> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputpwd1">押品交出时间</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        <input type="text" class="form-control datepicker" id="handover_dt" placeholder="mm/dd/yyyy"> 
+                                    </div>
+                                    <!-- <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-calendar"></i></div>
+                                        <input type="password" class="form-control" id="exampleInputpwd1" placeholder="Enter email"> </div> -->
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputpwd1">办理抵押时间</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        <input type="text" class="form-control datepicker" id="mortgage_dt" placeholder="mm/dd/yyyy"> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputpwd1">抵押贷款业务状态</label>
+                                    <select class="form-control">
+                                        <option value="" disabled selected>--- 请选择抵押贷款业务状态 ---</option>
+                                        <option value="house">放贷</option>
+                                        <option value="car">抵押</option>
+                                        <option value="car">撤单</option>
+                                    </select>
+                                </div>
+                            
+                                <!-- <div class="form-group">
+                                    <div class="checkbox checkbox-success">
+                                        <input id="checkbox1" type="checkbox">
+                                        <label for="checkbox1"> Remember me </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button> -->
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="row wizard-pane" role="tabpanel">
+                        <div class="col-sm-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">抵押物确认书编号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="确认书编号"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">抵押房产地址</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="抵押房产地址"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">房屋面积</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="房屋面积"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">产权证号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="产权证号"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">共有情况</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="共有情况"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">小区名</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="小区名"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">用途</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="用途"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">产证地址</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="产证地址"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">所在楼层/总楼层</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="所在楼层/总楼层"> </div>
+                                </div>                                
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                            <form>
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputuname">开发商</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="开发商"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">物业公司</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="物业公司"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">建筑结构</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="建筑结构"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">小区类型</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="小区类型"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">小区类型</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="小区类型"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">询价结果-单价</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="询价结果"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">询价结果-总价</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="询价结果-总价"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">询价时间</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="询价时间"> </div>
+                                </div>
+                                    
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row wizard-pane" role="tabpanel">
+                        <div class="col-sm-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">企业主体名称</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="企业主体名称"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">统一社会信用代码</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="统一社会信用代码"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">所属行业</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="所属行业"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">公司类型</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="公司类型"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">企业地址</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="企业地址"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">成立时间</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="成立时间"> </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">个人姓名</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="个人姓名"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">身份证号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="身份证号"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">性别</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="性别"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">出生年月</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="出生年月"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">婚姻状况</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="婚姻状况"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputuname">未结清贷款余额</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-file"></i></div>
+                                        <input type="text" class="form-control" id="exampleInputuname" placeholder="成立时间"> </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{% endblock %}
+

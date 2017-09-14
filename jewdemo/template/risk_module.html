@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+<link href="{%static "plugins/bower_components/css-chart/css-chart.css" %}" rel="stylesheet">
+{% block csslink %} 
+
+{% endblock %} 
+
+{% block appscript %} 
+<script src="{%static "plugins/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/knob/jquery.knob.js" %}"></script>
+<script src="{%static "plugins/bower_components/Chart.js/Chart.min.js" %}"></script>
+<script src="{%static "plugins/bower_components/credit/credit.js" %}"></script>
+<script src="{%static "plugins/bower_components/echart/echarts.min.js" %}"></script>
+
+
+<!-- <script src="{%static "js/easy-pie-chart.init.js" %}"></script> -->
+
+
+<script>
+!function($) {
+    "use strict";
+
+    var EasyPieChart = function() {};
+
+    EasyPieChart.prototype.init = function() {
+    	//initializing various types of easy pie charts
+    	$('.easy-pie-chart-1').easyPieChart({
+			easing: 'easeOutBounce',
+			barColor : '#b5a8b9',
+			lineWidth: 3,
+			animate: 1000,
+            lineCap: 'square',
+            trackColor: '#e5e5e5',
+			onStep: function(from, to, percent) {
+				$(this.el).find('.percent').text(Math.round(percent));
+			}
+		});
+    },
+    //init
+    $.EasyPieChart = new EasyPieChart, $.EasyPieChart.Constructor = EasyPieChart
+}(window.jQuery),
+
+//initializing
+function($) {
+    "use strict";
+    $.EasyPieChart.init()
+}(window.jQuery);
+$(function() {
+    $('[data-plugin="knob"]').knob();
+});
+
+
+var ctx6 = document.getElementById("chart6").getContext("2d");
+var data6 = {
+    labels: ["资产共有度","市场均价","陈新率","经济寿命","重复质押风险率","利率风险","经济周期风险"],
+    datasets: [
+        {
+            label: "市场平均",
+            fillColor: "rgba(2,190,201,0.4)",
+            strokeColor: "rgba(2,190,201,1)",
+            pointColor: "rgba(2,190,201,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(2,190,201,1)",
+            data: [65, 80 ,75, 75,30,40,50]
+        },
+        {
+            label: "资产标的",
+            fillColor: "rgba(181,168,185,0.8)",
+            strokeColor: "rgba(181,168,185,1)",
+            pointColor: "rgba(181,168,185,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(181,168,185,1)",
+            data: [28, 65 ,69, 55,0,20,15]
+        }
+    ]
+};
+
+var myRadarChart = new Chart(ctx6).Radar(data6, {
+    scaleShowLine : true,
+    angleShowLineOut : true,
+    scaleShowLabels : false,
+    scaleBeginAtZero : true,
+    angleLineColor : "rgba(0,0,0,.1)",
+    angleLineWidth : 1,
+    pointLabelFontFamily : "'Arial'",
+    pointLabelFontStyle : "normal",
+    pointLabelFontSize : 10,
+    pointLabelFontColor : "#666",
+    pointDot : true,
+    pointDotRadius : 3,
+    tooltipCornerRadius: 2,
+    pointDotStrokeWidth : 1,
+    pointHitDetectionRadius : 20,
+    datasetStroke : true,
+    datasetStrokeWidth : 2,
+    datasetFill : true,
+    
+    responsive: true
+});
+
+//债务风险模块
+var myChart = echarts.init(document.getElementById('zw_riskm'));
+option = {
+    calculable : true,
+    series : [
+        {
+            name:'面积模式',
+            type:'pie',
+            radius : [30, 110],
+            center : ['45%', '50%'],
+            roseType : 'area',
+            data:[
+                {value:10, name:'债务人关联方风险'},
+                {value:5, name:'还贷来源'},
+                {value:15, name:'负债风险'},
+                {value:25, name:'央行征信'},
+                {value:20, name:'失信模块'},
+                {value:35, name:'企业信用风险'},
+                {value:30, name:'社会行为模块'},
+                {value:40, name:'其他'}
+            ]
+        }
+    ]
+};
+myChart.setOption(option);
+</script>
+{% endblock %}
+
+{% block content %} 
+{% verbatim %}
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">抵押业务风险管理</h4>
+    </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">资产风险管理</a></li>
+            <li class="active">风险详情</li>
+        </ol>
+    </div>
+</div>
+
+<!-- 资产风险详情 -->
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="panel panel-info">
+
+            <div class="panel-heading"> 资产信息 
+                <div class="pull-right">
+                    <a href="#" data-perform="panel-collapse">
+                        <i class="ti-minus"></i>
+                    </a>
+                    <!-- <a href="#" data-perform="panel-dismiss">
+                        <i class="ti-close"></i>
+                    </a> -->
+                </div>
+            </div>
+
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                    <!-- <h3 class="box-title">Person Info</h3> -->
+                    <!-- <hr class="m-t-0 m-b-10"> -->
+                    <p><label class="col-sm-4">编号:</label> <span>锦押字2017-0364</span></p>
+                    
+                    <p><label class="col-sm-4">经营主体名称:</label> 成都华唯门业有限公司</p>
+
+                    <p><label class="col-sm-4">抵押物分类:</label> 房产 - 住宅</p>
+
+                    <p><label class="col-sm-4">抵押房产地址:</label> 金府路6号4栋1单元401</p>
+                    
+                    <p><label class="col-sm-4">房屋面积:</label> 117.18 (平米)</p>
+                    
+                    <p><label class="col-sm-4">银行估值:</label> 89.6 (万元)</p>
+
+                    <p><label class="col-sm-4">贷款金额:</label> 35 (万元)</p>
+
+                    <p><label class="col-sm-4">住宅(小区)位置:</label> 金府路6号 4栋1单元401</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="panel panel-info">
+            <div class="panel-heading"> 资产评分
+                <div class="pull-right">
+                    <a href="#" data-perform="panel-collapse">
+                        <i class="ti-minus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                    
+                    <div class="col-sm-6">
+                        <h3 class="box-title">评分</h3> 
+                        <hr class="m-t-0 m-b-10"> 
+                        
+                        <!-- 房产信息完整度 -->
+                        <div class="col-sm-4 chart easy-pie-chart-1" data-percent="75">
+                            <span class="percent">75</span> 
+                            <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas>
+                            <h6 class="text-muted m-t-10">房产信息完整度</h6> 
+                        </div>
+                        <div class="col-sm-8 white-box text-center">
+                            <input data-plugin="knob" data-width="100" data-height="100" data-min="-100" data-fgColor="#cbb2ae" data-displayPrevious=true data-angleOffset=-125 data-angleArc=250 readonly="readonly" value="58" />
+                            <h6 class="text-muted m-t-10">资产评分</h6>  
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h3 class="box-title">资产风险模块
+                            <span style="background:rgba(181,168,185,0.8);color:white">资产标的</span>
+                            <span style="background:rgba(2,190,201,0.8);color:white">市场平均</span>
+                        </h3> 
+                        <hr class="m-t-0 m-b-10"> 
+                        <div>
+                            <canvas id="chart6" height="140"></canvas>
+                        </div>
+                    </div>            
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+
+<!-- 债务人风险详情 -->
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading"> 债务方信息
+                <div class="pull-right">
+                    <a href="#" data-perform="panel-collapse">
+                        <i class="ti-minus"></i>
+                    </a>
+                    <!-- <a href="#" data-perform="panel-dismiss">
+                        <i class="ti-close"></i>
+                    </a> -->
+                </div>
+            </div>
+
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                    <!-- <h3 class="box-title">Person Info</h3> -->
+                    <!-- <hr class="m-t-0 m-b-10"> -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">成都华唯门业有限公司</span></a></li>
+                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">陈伟华</span></a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <!-- <p><label class="col-sm-4">编号:</label> <span>锦押字2017-0364</span></p> -->
+                    
+                            <p><label class="col-sm-4">经营主体名称:</label> 成都华唯门业有限公司</p>
+
+                            <p><label class="col-sm-4">统一社会信用代码:</label>91510124343109534K</p>
+
+                            <p><label class="col-sm-4">注册资本:</label> 100 万元 人民币</p>
+                            
+                            <p><label class="col-sm-4">成立时间:</label> 2015-06-24</p>
+                            
+                            <p><label class="col-sm-4">所属行业:</label> 金属制品业</p>
+
+                            <p><label class="col-sm-4">公司类型:</label> 有限责任公司(自然人投资或控股)</p>
+
+                            <p><label class="col-sm-4">法定代表人:</label> 陈伟华</p>
+
+                            <p><label class="col-sm-4">企业地址:</label> 郫县成都现代工业港北片区港北二路551号</p>
+                            
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                    
+                            <p><label class="col-sm-4">姓名:</label> 陈伟华</p>
+
+                            <p><label class="col-sm-4">性别:</label> 男</p>
+
+                            <p><label class="col-sm-4">个人身份证号:</label> 330722197005058000</p>
+
+                            <p><label class="col-sm-4">联系电话:</label> 13088032156</p>
+                            
+                            <p><label class="col-sm-4">婚姻状况:</label> 已婚</p>
+                            
+                            <p><label class="col-sm-4">信用卡严重预期:</label> 无</p>
+
+                            <p><label class="col-sm-4">未结清贷款余额:</label> 55.08 万</p>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading"> 债务人风险评级
+                <div class="pull-right">
+                    <a href="#" data-perform="panel-collapse">
+                        <i class="ti-minus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                    
+                    <div class="col-sm-6">
+                        <h3 class="box-title">债务方评级</h3> 
+                        <hr class="m-t-0 m-b-10"> 
+                        <canvas id="credit_canvas" width="400" height="270" data-score='724'></canvas>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h3 class="box-title">债务方风险模块</h3> 
+                        <hr class="m-t-0 m-b-10"> 
+                        <div id="zw_riskm" style="width: 500px;height:270px;"></div>
+                    </div>            
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+
+<!-- <div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+
+
+            <hr>抵押标的 info 评级
+
+
+
+
+            <hr>债务人征信KPI 评级 债务人央行征信 社会数据 财产 房产 还贷来源 负债 个人 学历 通讯 民族 年龄 婚姻 消费 网上消费 银联消费 企业
+
+
+            <hr>担保人风险KPI 评级
+
+
+
+
+        </div>
+    </div>
+</div> -->
+
+{% endverbatim %}
+{% endblock %}

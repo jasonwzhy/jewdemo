@@ -1,0 +1,44 @@
+{% verbatim %}
+<html>
+    <head>
+        <script src="http://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{message}}
+        </div>
+
+        <div id="app4">
+            <ol>
+                <li v-for="item in foodlist">
+                    {{item}}
+                </li>
+            </ol>
+            <input v-model="food"><span>{{food}}</span>
+            <button v-on:click="addfood">添加</button>
+        </div>
+
+    </body>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message :'hello vue django index'
+            }
+        })
+
+        var app4 = new Vue({
+        el:'#app4',
+        data:{
+            foodlist:["apple","rice"],
+            food:"",
+        },
+        methods:{
+            addfood:function(){
+                this.foodlist.push(this.food)
+            }
+        }
+    })
+    </script>
+</html>
+{% endverbatim %}

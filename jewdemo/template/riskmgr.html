@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block csslink %}
+<link href="{%static "plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css" %}" rel="stylesheet">
+<!-- <link href="{%static "plugins/bower_components/morrisjs/morris.css" %}" rel="stylesheet"> -->
+<!-- <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet"> -->
+{% endblock %}
+
+{% block appscript %}
+<!-- <script src="{%static "plugins/bower_components/morrisjs/morris.js" %}"></script>
+<script src="{%static "plugins/bower_components/raphael/raphael-min.js" %}"></script> -->
+
+<script src="{%static "plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" %}"></script>
+ <!-- <script src="{%static "plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js" %}"></script>  -->
+<script src="{%static "plugins/bower_components/Chart.js/Chart.min.js" %}"></script>
+
+{% verbatim %}
+<script>
+$(document).ready(function() {
+    
+   var sparklineLogin = function() { 
+        $('#sales1').sparkline([1200, 2000], {
+            type: 'pie',
+            height: '120',
+            resize: true,
+            // sliceColors: ['#aec9cb', '#7d6f82', '#ffffff']
+            sliceColors: ['#7d6f82', '#ffffff'],
+            tooltipFormat: '{{value:levels}} - {{value}}',
+            tooltipValueLookups: {
+                levels: $.range_map({ ':1300': '公司总数', '1300:': '个人总数'})
+            }
+        });
+        $('#sparkline2dash').sparkline([6, 10, 9, 11, 9, 10, 12], {
+            type: 'bar',
+            height: '154',
+            barWidth: '4',
+            resize: true,
+            barSpacing: '10',
+            barColor: '#fff'
+        });
+        $("#sparkline14").sparkline([0.8, 0.7, 0.9, 1, 0.8, 0.7, 0.9, 0.8, 0.8, 1, 0.9, 0.7, 0.8], {
+            type: 'line',
+            width: '100%',
+            height: '120',
+            lineColor: '#fff',
+            fillColor: 'transparent',
+            spotColor: '#fff',
+            minSpotColor: undefined,
+            maxSpotColor: undefined,
+            highlightSpotColor: undefined,
+            highlightLineColor: undefined
+        });
+        
+   }
+    var sparkResize;
+ 
+        $(window).resize(function(e) {
+            clearTimeout(sparkResize);
+            sparkResize = setTimeout(sparklineLogin, 500);
+        });
+        sparklineLogin();
+
+
+    var ctx1 = document.getElementById("chart1").getContext("2d");
+    var data1 = {
+        labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月"],
+        datasets: [
+            {
+                label: "risk_update",
+                fillColor: "rgba(243,245,246,0.9)",
+                strokeColor: "rgba(243,245,246,0.9)",
+                pointColor: "rgba(243,245,246,0.9)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(243,245,246,0.9)",
+                data: [28, 38, 30, 41, 32, 40, 42]
+            },
+            {
+                label: "mortgage_add",
+                fillColor: "rgba(133,180,208,0.8)",
+                strokeColor: "rgba(133,180,208,0.8)",
+                pointColor: "rgba(133,180,208,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(133,180,208,1)",
+                data: [10, 12, 15, 20, 16, 20, 21]
+            }
+            
+        ]
+    };
+    var chart1 = new Chart(ctx1).Line(data1, {
+        scaleShowGridLines : true,
+        scaleGridLineColor : "rgba(0,0,0,.005)",
+        scaleGridLineWidth : 0,
+        scaleShowHorizontalLines: true,
+        scaleShowVerticalLines: true,
+        bezierCurve : true,
+        bezierCurveTension : 0.4,
+        pointDot : true,
+        pointDotRadius : 4,
+        pointDotStrokeWidth : 1,
+        pointHitDetectionRadius : 2,
+        datasetStroke : true,
+		tooltipCornerRadius: 2,
+        datasetStrokeWidth : 2,
+        datasetFill : true,
+        responsive: true
+    });
+
+});
+</script>
+{% endverbatim %}
+{% endblock %}
+
+
+{% block content %}
+{% verbatim %}
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">抵押资产风险管理</h4> </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+        <ol class="breadcrumb">
+            <li><a href="#">抵押资产风险管理</a></li>
+            <li class="active">Index</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <!-- <div class="col-sm-2">
+
+                </div> -->
+                <div class="col-sm-12">
+                    <form>
+                        <div class="input-group m-t-10">
+                            <input type="" id="example-input2-group2" name="example-input2-group2" class="form-control" placeholder="" value="成都华唯门业有限公司">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn waves-effect waves-light btn-info" onclick="location.href='/riskmgr/riskdetail'">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="white-box">
+            <h3 class="box-title">最新抵押资产业务审核</h3>
+            <div class="comment-center">
+                <div class="comment-body" onclick="location.href='/riskmgr/riskdetail'">
+                    <!-- <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"></div> -->
+                    <div class="mail-contnet">
+                        <h5>锦押字2017-0364</h5>
+                        <span class="mail-desc">
+                            抵押物类型：住宅房产;
+                            债务人：陈伟华;
+                            债务人：成都华唯门业有限公司;
+                            银行估价：89.6(万)
+                            银行：铁道支行;
+                            客户经理：谢涛;
+                            客户经理电话：1398851166;
+                        </span>
+                        <span class="label label-rouded label-info">PENDING</span>
+                        <a href="javacript:void(0)" class="action">
+                            <i class="ti-close text-danger"></i>
+                        </a>
+                        <a href="javacript:void(0)" class="action">
+                            <i class="ti-check text-success"></i>
+                        </a
+                        ><span class="time pull-right">April 16, 2016</span>
+                    </div>
+                </div>
+                <div class="comment-body">
+                    <!-- <div class="user-img"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle"> </div> -->
+                    <div class="mail-contnet">
+                        <h5>锦押字2017-0277</h5> <span class="mail-desc">
+                            抵押物类型：住宅房产;
+                            债务人：陈立尧;
+                            债务人：广元市利州区老妈抄手;
+                            银行估价：122.7(万)
+                            银行：广元分行;
+                            客户经理：赵勍;
+                            客户经理电话：15892266597;
+                        </span><span class="label label-rouded label-success">APPROVED</span><a href="javacript:void(0)" class="action"><i class="ti-close text-danger"></i></a> <a href="javacript:void(0)" class="action"><i class="ti-check text-success"></i></a><span class="time pull-right">April 15, 2017</span></div>
+                </div>
+                <div class="comment-body">
+                    <!-- <div class="user-img"> <img src="../plugins/images/users/arijit.jpg" alt="user" class="img-circle"> </div> -->
+                    <div class="mail-contnet">
+                        <h5>锦押字2017-0078</h5> <span class="mail-desc">
+                            抵押物类型：住宅房产;
+                            债务人：安道明;
+                            债务人：成华区众发建材经营部;
+                            银行估价：62.9(万)
+                            银行：新都支行;
+                            客户经理：赵俊峰;
+                            客户经理电话：15982090651;
+                        </span><span class="label label-rouded  label-info">PENDING</span><a href="javacript:void(0)" class="action"><i class="ti-close text-danger"></i></a> <a href="javacript:void(0)" class="action"><i class="ti-check text-success"></i></a><span class="time pull-right">April 14, 2017</span></div>
+                </div>
+                <div class="comment-body b-none">
+                    <!-- <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"></div> -->
+                    <div class="mail-contnet">
+                        <h5>锦押字2017-0077</h5> <span class="mail-desc">
+                            抵押物类型：住宅房产;
+                            债务人：王尧;
+                            债务人：广元市利州区老妈抄手;
+                            银行估价：282.7(万)
+                            银行：广元分行;
+                            客户经理：赵勍;
+                            客户经理电话：15892266597;
+                        </span> <span class="label label-rouded label-danger">REJECTED</span> <a href="javacript:void(0)" class="action"><i class="ti-close text-danger"></i></a> <a href="javacript:void(0)" class="action"><i class="ti-check text-success"></i></a><span class="time pull-right">April 14, 2017</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+        <div class="white-box bg-success m-b-15">
+            <h3 class="box-title text-white">债务/抵押方主体数量占比</h3>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6  m-t-30">
+                    <h1 class="text-white">0.9</h1>
+                    <p class="light_op_text">最后更新: 2017-07-01</p> 
+                    <!-- <b class="text-white">(150 Sales)</b>  -->
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <!-- <div id="sparkline2dash" class="text-center"><canvas width="88" height="154" style="display: inline-block; width: 88px; height: 154px; vertical-align: top;"></canvas></div> -->
+                    <div id="sparkline14"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+        <div class="white-box bg-purple m-b-15">
+            <h3 class="text-white box-title">债务方公司、个人占比</h3>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6  m-t-30">
+                    <h1 class="text-white">60 %</h1>
+                    <!-- <b class="text-white">(150 Sales)</b>  -->
+                    <p class="light_op_text">最后更新: 2017-07-01</p></div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div id="sales1" class="text-center"><canvas width="120" height="120" style="display: inline-block; width: 120px; height: 120px; vertical-align: top;"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="white-box">
+                <div>
+                    <h3 class="box-title">抵押业务增长 & 风险评级更新</h3>
+                    
+                    <canvas id="chart1" height="126"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="col-sm-6">
+        <div class="white-box">
+            <hr>债务人公司、个人占比
+            <hr>债务方总数／抵押担保方总数 占比
+            
+            <hr>抵押业务增长 & 风险评级更新 line chart
+        </div>
+    </div> -->
+</div> 
+
+
+{% endverbatim %}
+{% endblock %}
+

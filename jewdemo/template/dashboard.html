@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block csslink %}
+<link href="{%static "plugins/bower_components/morrisjs/morris.css" %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block appscript %}
+<script src="{%static "plugins/bower_components/raphael/raphael-min.js" %}"></script>
+<script src="{%static "plugins/bower_components/morrisjs/morris.js" %}"></script>
+
+<script src="{%static "plugins/bower_components/Chart.js/Chart.min.js" %}"></script>
+
+<script>
+    Morris.Area({
+        element: 'morris-area-chart',
+        data: [{
+            period: '2016 Q1',
+            house: 110,
+            car: 0,
+        }, {
+            period: '2016 Q2',
+            house: 190,
+            car: 0,
+        }, {
+            period: '2016 Q3',
+            house: 180,
+            car: 10,
+        }, {
+            period: '2016 Q4',
+            house: 200,
+            car: 20,
+        }, {
+            period: '2017 Q1',
+            house: 380,
+            car: 50,
+        }, {
+            period: '2017 Q2',
+            house: 405,
+            car: 70,
+        },
+        {
+            period: '2017 Q3',
+            house: 650,
+            car: 150,
+        }],
+        xkey: 'period',
+        ykeys: ['house', 'car'],
+        labels: ['房产处理累计', '汽车处理累计'],
+        pointSize: 3,
+        fillOpacity: 0,
+        pointStrokeColors:['#aec9cb', '#cbb2ae', '#85b4d0'],
+        behaveLikeLine: true,
+        gridLineColor: '#e0e0e0',
+        lineWidth: 3,
+        hideHover: 'auto',
+        lineColors: ['#aec9cb', '#cbb2ae', '#85b4d0'],
+        resize: true
+        
+    });
+
+    var ctx1 = document.getElementById("chart1").getContext("2d");
+    var data1 = {
+        labels: ["AAA", "AA", "A", "BBB", "BB", "B", "CCC"],
+        datasets: [
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(133,180,208,0.8)",
+                strokeColor: "rgba(133,180,208,0.8)",
+                pointColor: "rgba(133,180,208,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(243,245,246,0.9)",
+                data: [18, 138, 110, 79, 46, 27, 10]
+            },
+            // {
+            //     label: "My First dataset",
+            //     fillColor: "rgba(133,180,208,0.8)",
+            //     strokeColor: "rgba(133,180,208,0.8)",
+            //     pointColor: "rgba(133,180,208,1)",
+            //     pointStrokeColor: "#fff",
+            //     pointHighlightFill: "#fff",
+            //     pointHighlightStroke: "rgba(133,180,208,1)",
+            //     data: [0, 59, 80, 58, 20, 55, 40]
+            // }
+            
+        ]
+    };
+
+    var chart1 = new Chart(ctx1).Line(data1, {
+        scaleShowGridLines : true,
+        scaleGridLineColor : "rgba(0,0,0,.005)",
+        scaleGridLineWidth : 0,
+        scaleShowHorizontalLines: true,
+        scaleShowVerticalLines: true,
+        bezierCurve : true,
+        bezierCurveTension : 0.4,
+        pointDot : true,
+        pointDotRadius : 4,
+        pointDotStrokeWidth : 1,
+        pointHitDetectionRadius : 2,
+        datasetStroke : true,
+		tooltipCornerRadius: 2,
+        datasetStrokeWidth : 2,
+        datasetFill : true,
+        
+        responsive: true
+    });
+
+    
+</script>
+{% endblock %}
+
+
+{% block content %}
+{% verbatim %}
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Dashboard</h4> </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+        <ol class="breadcrumb">
+            <li><a href="#">Index</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+<div class="col-md-6 col-lg-6 col-sm-6">
+    <div class="row row-in">
+        <!-- /.col -->
+        <!--col -->
+        <div class="col-lg-6 col-sm-12">
+            <div class="white-box">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6"> <i data-icon="E" class="linea-icon linea-basic"></i>
+                        <h5 class="text-muted vb">资产抵押业务数</h5> </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h3 class="counter text-right m-t-15 text-danger">323</h3> </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+        <!--col -->
+        <div class="col-lg-6 col-sm-12">
+            <div class="white-box">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
+                        <h5 class="text-muted vb">资产风险管理总数</h5> </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h3 class="counter text-right m-t-15 text-megna">869</h3> </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+        <!--col -->
+        <div class="col-lg-6 col-sm-12">
+            <div class="white-box">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
+                        <h5 class="text-muted vb">资产处置累计</h5> </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h3 class="counter text-right m-t-15 text-primary">757</h3> </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+        <!--col -->
+        <div class="col-lg-6 col-sm-12">
+            <div class="white-box">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe016;"></i>
+                        <h5 class="text-muted vb">资产价值总额(万)</h5> </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h3 class="counter text-right m-t-15 text-success">31,229</h3> </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">不良资产累计处置</h3>
+            <ul class="list-inline text-right">
+                <li>
+                    <h5><i class="fa fa-circle m-r-5" style="color: #aec9cb;"></i>住宅房产</h5> </li>
+                <li>
+                    <h5><i class="fa fa-circle m-r-5" style="color: #cbb2ae;"></i>汽车</h5> </li>
+                <!-- <li>
+                    <h5><i class="fa fa-circle m-r-5" style="color: #85b4d0;"></i>iPod</h5> </li> -->
+            </ul>
+            <div id="morris-area-chart" style="height: 240px;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">不良资产风险等级分布</h3>
+            <div>
+                <canvas id="chart1" height="70"></canvas>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endverbatim %}
+{% endblock %}
+
